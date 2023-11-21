@@ -39,10 +39,10 @@ const Navbar = () => {
           // const active = pathname === item.href;
           // console.log(pathname);
           return (
-            <li key={item.name}>
+            <li key={item.name} className="flex">
               <NavLink 
                 to={item.href}
-                className={({ isActive }) => isActive ? activeStyle : 'flex'}
+                className={({ isActive }) => isActive ? activeStyle : undefined}
               >
                 {item.name}
               </NavLink>

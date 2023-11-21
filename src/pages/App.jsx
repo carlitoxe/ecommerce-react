@@ -7,13 +7,15 @@ import SignIn from "./signin";
 import MyOrders from "./myorders";
 import Layout from "../components/Layout";
 import { ShoppingCartProvider } from "../context";
+import CheckoutSideMenu from "../components/CheckoutSideMenu";
 
 const AppRoutes = () => {
   let routes = useRoutes([
     { path: '/', element: <Home /> },
-    { path: '/my-orders', element: <MyOrders /> },
     { path: '/my-account', element: <MyAccount /> },
     { path: '/my-order', element: <MyOrder /> },
+    { path: '/my-orders', element: <MyOrders /> },
+    { path: '/my-orders/last', element: <MyOrder /> },
     { path: '/sign-in', element: <SignIn /> },
     { path: '*', element: <NotFound /> },
   ]);
@@ -26,6 +28,7 @@ function App() {
       <BrowserRouter>
         <Layout>
           <AppRoutes />
+          <CheckoutSideMenu />
         </Layout>
       </BrowserRouter>
     </ShoppingCartProvider>
