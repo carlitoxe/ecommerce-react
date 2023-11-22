@@ -9,11 +9,14 @@ const Navbar = () => {
 
   const navigationLeft = [
     { name: 'All', href: '/' },
-    { name: 'Clothes', href: '/clothes' },
-    { name: 'Electronics', href: '/electronics' },
-    { name: 'Furniture', href: '/furniture' },
-    { name: 'Toys', href: '/toys' },
-    { name: 'Others', href: '/others' },
+    // { name: 'Clothes', href: '/clothes' },
+    { name: 'Electronics', href: 'category/electronics' },
+    { name: "Men's Clothing", href: 'category/mens-clothing' },
+    { name: "Women's Clothing", href: 'category/womens-clothing' },
+    { name: 'Jewelery', href: 'category/jewelery' },
+    // { name: 'Furniture', href: 'category/furniture' },
+    // { name: 'Toys', href: '/toys' },
+    // { name: 'Others', href: '/others' },
   ];
 
   const navigationRight = [
@@ -28,7 +31,7 @@ const Navbar = () => {
   // }
 
   return (
-    <nav className="flex justify-between items-center fixed w-full py-5 px-8 text-sm font-light top-0 z-10 bg-black/80">
+    <nav className="flex justify-between items-center fixed w-full py-5 px-12 text-sm font-light top-0 z-50 bg-black/80">
       <ul className="flex items-center text-white gap-3">
         <li className="font-semibold text-lg">
           <NavLink to="/">

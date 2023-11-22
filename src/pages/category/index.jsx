@@ -7,18 +7,12 @@ import ProductDetailSide from "../../components/ProductDetailSide";
 import { ShoppingCartContext } from "../../context";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 
-function Home() {
+function Category() {
   // const [products, setProducts] = useState(null);
   // const [isLoading, setIsLoading] = useState(false);
   const { searchedProducts, searchValue, onSearchValue, isLoading } = useContext(ShoppingCartContext);
-
   const { category } = useParams();
-  // console.log(category);
-
-  const categoryName = category?.replace('-', ' ').replace('mens', "men's");
-  const filteredByCategory = category ? 
-                              searchedProducts?.filter(product => product.category === categoryName) : 
-                              searchedProducts;
+  console.log(category);
 
   // useEffect(() => {
   //   // const fetchData = async () => {
@@ -49,11 +43,16 @@ function Home() {
   // }
 
 
+  // console.log(categoryName);
+  
+    const categoryName = category.replace('-', ' ').replace('mens', "men's");
+
+    const filteredByCategory = searchedProducts?.filter(product => product.category === categoryName);
 
   return (
     <>
       <div className="flex items-center relative justify-center w-2/4 mb-3">
-        <h1 className="text-center text-2xl">All Products</h1>
+        <h1 className="text-center text-2xl capitalize">{categoryName}</h1>
       </div>
 
       <form>
@@ -128,4 +127,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Category;

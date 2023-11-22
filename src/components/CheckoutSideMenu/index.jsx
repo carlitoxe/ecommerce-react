@@ -7,22 +7,29 @@ import { Link } from "react-router-dom";
 // import './styles.css'
 
 const CheckoutSideMenu = () => {
-  const { isCheckoutSideMenuOpen, closeCheckoutSideMenu, cartProducts, setCartProducts, order, setOrder, setCount } = useContext(ShoppingCartContext);
+  const { isCheckoutSideMenuOpen, closeCheckoutSideMenu, cartProducts, setCartProducts, orders, setOrders, count, setCount } = useContext(ShoppingCartContext);
   const total = totalPrice(cartProducts);
+  
+  const isCartProducts = cartProducts.length !== 0;
 
   const handleCheckout = () => {
-    const timeNow = Date.now();
-    const today = new Date(timeNow);
-    const orderToAdd = {
-        date: today.toUTCString(),
-        products: cartProducts,
-        totalProducts: cartProducts.length,
-        totalPrice: total
+    const date = new Date();
+    // const timeNow = Date.now();
+    if (isCartProducts) {
+        const orderToAdd = {
+            id: crypto.randomUUID(),
+            date: date.toLocaleDateString(),
+            products: cartProducts,
+            totalProducts: cartProducts.length,
+            totalPrice: total
+        }
+        setOrders([...orders, orderToAdd]);
+        setCartProducts([]);
+        setCount(0);
+        closeCheckoutSideMenu();
+    } else {
+        return
     }
-    setOrder([...order, orderToAdd]);
-    setCartProducts([]);
-    setCount(0);
-    closeCheckoutSideMenu();
   }
 
 
@@ -57,7 +64,7 @@ const handleDelete = (e, id) => {
                         <span className="text-lime-400 text-lg font-medium">${total.toFixed(2)}</span>
                     </p>
                     <div className="flex justify-center mb-4">
-                    <Link className="w-full" to={'/my-orders/last'}>
+                    <Link className='w-full' to={`${!isCartProducts ? 'javascript:void(0)' : '/my-orders/last'}`}>
                         <button 
                             type="button" 
                             className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 me-2 mb-2 dark:text-black dark:bg-white dark:hover:bg-blue-700 dark:hover:text-white focus:outline-none dark:focus:ring-blue-800"

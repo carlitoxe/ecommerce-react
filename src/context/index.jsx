@@ -1,4 +1,6 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
+import { apiUrl } from "../api"
+
 
 export const ShoppingCartContext = createContext();
 
@@ -26,8 +28,36 @@ export const ShoppingCartProvider = ({ children }) => {
     console.log(cartProducts);
 
     // Shopping Cart - Order
-    const [order, setOrder] = useState([]);
-    console.log(order);
+    const [orders, setOrders] = useState([]);
+    // console.log('order', orders);
+
+    // Get Products
+    const [products, setProducts] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
+
+    useEffect(() => {
+        setIsLoading(true);
+        fetch(`${apiUrl}/products`)
+          .then(res => res.json())
+          .then(data => setProducts(data))
+          .catch(err => console.error(err))
+          .finally(() => setIsLoading(false))
+      }, [])
+
+    // Search Products by title
+      const [ searchValue, setSearchValue ] = useState('');
+
+      const onSearchValue = e => {
+        setSearchValue(e.target.value)
+      }
+
+      let searchedProducts = []
+    
+      if (searchValue) {
+        searchedProducts = products.filter(product => product.title.toLowerCase().includes(searchValue.toLowerCase()))
+      } else {
+        searchedProducts = products;
+      }
 
     return (
         <ShoppingCartContext.Provider 
@@ -46,8 +76,15 @@ export const ShoppingCartProvider = ({ children }) => {
             isCheckoutSideMenuOpen,
             openCheckoutSideMenu,
             closeCheckoutSideMenu,
-            order,
-            setOrder
+            orders,
+            setOrders,
+            products,
+            setProducts,
+            isLoading,
+            searchValue,
+            onSearchValue,
+            setSearchValue,
+            searchedProducts,
         }}
         >
             {children}
