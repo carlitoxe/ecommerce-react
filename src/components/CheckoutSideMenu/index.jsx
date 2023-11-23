@@ -2,44 +2,11 @@ import { useContext } from "react";
 import { XCircleIcon, XMarkIcon } from "@heroicons/react/20/solid";
 import { ShoppingCartContext } from "../../context";
 import OrderCard from "../OrderCard";
-import { totalPrice } from "../../utils";
 import { Link } from "react-router-dom";
 // import './styles.css'
 
 const CheckoutSideMenu = () => {
-  const { isCheckoutSideMenuOpen, closeCheckoutSideMenu, cartProducts, setCartProducts, orders, setOrders, count, setCount } = useContext(ShoppingCartContext);
-  const total = totalPrice(cartProducts);
-  
-  const isCartProducts = cartProducts.length !== 0;
-
-  const handleCheckout = () => {
-    const date = new Date();
-    // const timeNow = Date.now();
-    if (isCartProducts) {
-        const orderToAdd = {
-            id: crypto.randomUUID(),
-            date: date.toLocaleDateString(),
-            products: cartProducts,
-            totalProducts: cartProducts.length,
-            totalPrice: total
-        }
-        setOrders([...orders, orderToAdd]);
-        setCartProducts([]);
-        setCount(0);
-        closeCheckoutSideMenu();
-    } else {
-        return
-    }
-  }
-
-
-const handleDelete = (e, id) => { 
-    e.stopPropagation();
-    const cartUpdated = cartProducts.filter(product => product.id !== id)
-    setCartProducts(cartUpdated)
-    setCount(count - 1);
-    console.log(cartProducts);
-}
+  const { isCheckoutSideMenuOpen, closeCheckoutSideMenu, cartProducts, handleCheckout, handleDelete, isCartProducts, total } = useContext(ShoppingCartContext);
 
     return (
         <aside className={`${isCheckoutSideMenuOpen ? 'flex' : 'hidden'} flex-col fixed right-0 border bg-black border-white rounded-lg top-[68px] w-[360px] h-[calc(100vh-68px)] z-10 overflow-y-scroll`}>

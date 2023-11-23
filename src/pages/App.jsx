@@ -1,6 +1,6 @@
 import { useRoutes, BrowserRouter } from "react-router-dom";
 import Home from "./home";
-import Category from "./category";
+import Cart from "./cart";
 import MyAccount from "./myaccount";
 import MyOrder from "./myorder";
 import NotFound from "./notfound";
@@ -14,6 +14,7 @@ import { ScrollToTop } from "../utils";
 const AppRoutes = () => {
   let routes = useRoutes([
     { path: '/', element: <Home /> },
+    { path: '/cart', element: <Cart /> },
     { path: '/category/:category', element: <Home /> },
     { path: '/my-account', element: <MyAccount /> },
     { path: '/my-order/:id', element: <MyOrder /> },

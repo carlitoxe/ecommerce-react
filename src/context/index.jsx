@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 import { apiUrl } from "../api"
-
+import { totalPrice } from "../utils";
 
 export const ShoppingCartContext = createContext();
 
@@ -26,6 +26,37 @@ export const ShoppingCartProvider = ({ children }) => {
     // Shopping Cart - Add products to cart
     const [cartProducts, setCartProducts] = useState([]);
     console.log(cartProducts);
+
+    // Handling Shopping Cart
+    const isCartProducts = cartProducts.length !== 0;
+    const total = totalPrice(cartProducts);
+
+    const handleCheckout = () => {
+      const date = new Date();
+      // const timeNow = Date.now();
+      if (isCartProducts) {
+          const orderToAdd = {
+              id: crypto.randomUUID(),
+              date: date.toLocaleDateString(),
+              products: cartProducts,
+              totalProducts: cartProducts.length,
+              totalPrice: total
+          }
+          setOrders([...orders, orderToAdd]);
+          setCartProducts([]);
+          setCount(0);
+          closeCheckoutSideMenu();
+      } else {
+          return
+      }
+    }
+    const handleDelete = (e, id) => { 
+        e.stopPropagation();
+        const cartUpdated = cartProducts.filter(product => product.id !== id)
+        setCartProducts(cartUpdated)
+        setCount(count - 1);
+        console.log(cartProducts);
+    }
 
     // Shopping Cart - Order
     const [orders, setOrders] = useState([]);
@@ -85,6 +116,10 @@ export const ShoppingCartProvider = ({ children }) => {
             onSearchValue,
             setSearchValue,
             searchedProducts,
+            handleCheckout,
+            handleDelete,
+            isCartProducts,
+            total
         }}
         >
             {children}

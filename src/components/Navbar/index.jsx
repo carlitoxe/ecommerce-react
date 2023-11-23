@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { ShoppingCartIcon } from "@heroicons/react/20/solid";
 
 const Navbar = () => {
-  const activeStyle = 'flex underline underline-offset-4 decoration-blue-500 decoration-2'; 
+  const activeStyle = 'flex bg-gray-700 font-normal rounded-lg px-2 py-1'; 
   const { count } = useContext(ShoppingCartContext)
 
   const navigationLeft = [
@@ -23,7 +23,7 @@ const Navbar = () => {
     { name: 'My Orders', href: '/my-orders' },
     { name: 'My Account', href: '/my-account' },
     { name: 'Sign In', href: '/sign-in' },
-    { name: 'My Order', href: '/my-order' },
+    { name: 'My Order', href: '/cart' },
   ];
 
   // function classNames(...classes) {
@@ -32,8 +32,8 @@ const Navbar = () => {
 
   return (
     <nav className="flex justify-between items-center fixed w-full py-5 px-12 text-sm font-light top-0 z-50 bg-black/80">
-      <ul className="flex items-center text-white gap-3">
-        <li className="font-semibold text-lg">
+      <ul className="flex items-center text-white gap-0.5">
+        <li className="font-semibold text-lg mr-3">
           <NavLink to="/">
             Shopi
           </NavLink>
@@ -45,7 +45,7 @@ const Navbar = () => {
             <li key={item.name} className="flex">
               <NavLink 
                 to={item.href}
-                className={({ isActive }) => isActive ? activeStyle : undefined}
+                className={({ isActive }) => isActive ? activeStyle : 'px-2'}
               >
                 {item.name}
               </NavLink>
@@ -92,7 +92,7 @@ const Navbar = () => {
                 to={item.href}
                 className={({ isActive }) => isActive ? activeStyle : 'flex'}
               >
-                {item.href !== '/my-order' ? 
+                {item.href !== '/cart' ? 
                 item.name : 
                 <><ShoppingCartIcon className="h-5 w-5 mr-0.5 text-blue-500" /> <span>{count}</span></>
                 }
