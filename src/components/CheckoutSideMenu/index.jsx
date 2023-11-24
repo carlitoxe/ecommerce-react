@@ -9,7 +9,7 @@ const CheckoutSideMenu = () => {
   const { isCheckoutSideMenuOpen, closeCheckoutSideMenu, cartProducts, handleCheckout, handleDelete, isCartProducts, total } = useContext(ShoppingCartContext);
 
     return (
-        <aside className={`${isCheckoutSideMenuOpen ? 'flex' : 'hidden'} flex-col fixed right-0 border bg-black border-white rounded-lg top-[68px] w-[360px] h-[calc(100vh-68px)] z-10 overflow-y-scroll`}>
+        <aside className={`${isCheckoutSideMenuOpen ? 'flex' : 'hidden'} flex-col fixed right-0 border bg-black border-gray-500 rounded-lg top-[68px] w-[360px] h-[calc(100vh-68px)] z-10 overflow-y-scroll`}>
             <div className="flex justify-between items-center pt-4 px-4 pb-2">
                 <h2 className="text-lg text-white">My Order</h2>
                     <button 

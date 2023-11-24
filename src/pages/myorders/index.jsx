@@ -9,7 +9,7 @@ function MyOrders() {
 
   return (
         <>
-          <div className='mb-4'>
+          <div className='mt-2 mb-4'>
             <h1 className='text-center text-2xl'>My Orders</h1>
           </div>
           <section className='flex flex-col gap-4 w-full items-center justify-center px-4 sm:px-8 md:px-2 lg:px-8'>

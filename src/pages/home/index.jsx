@@ -52,11 +52,11 @@ function Home() {
 
   return (
     <>
-      <div className="flex items-center relative justify-center mb-3">
-        <h1 className="text-center text-2xl">All Products</h1>
+      <div className="flex items-center relative justify-center mt-2 mb-3">
+        <h1 className="text-center text-2xl capitalize">{categoryName ? categoryName : 'All Products'}</h1>
       </div>
       <div className="flex justify-center items-center">
-        <form className="w-80 mb-2">
+        <form className="w-80 mb-7">
 
     <label
       htmlFor="default-search"

@@ -19,7 +19,7 @@ function MyOrder() {
 
     return (
       <>
-        <div className='flex items-center relative justify-center w-2/4 mb-5'>
+        <div className='flex items-center relative justify-center w-2/4 mt-2 mb-5'>
           <Link to={'/my-orders'} className='absolute left-0 hover:text-blue-500'>
             <ChevronLeftIcon className='w-8 h-8' />
           </Link>

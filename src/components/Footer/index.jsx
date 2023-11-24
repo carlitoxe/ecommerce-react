@@ -2,7 +2,7 @@ import { EnvelopeIcon } from '@heroicons/react/20/solid';
 
 const Footer = () => {
     return (
-        <footer className="bg-white dark:bg-black relative mt-28 px-8 w-full">
+        <footer className="bg-white dark:bg-black relative mt-28 px-8 w-full border-t border-gray-600">
         <div className="mx-auto w-full max-w-screen-xl">
           <div className="px-4 py-6 text-center md:flex md:items-center md:justify-between">
             <span className="text-sm text-gray-500 dark:text-gray-300 sm:text-center">
