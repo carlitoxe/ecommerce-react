@@ -21,7 +21,7 @@ const Cart = () => {
               <OrderCard key={product.id} {...product} handleDelete={handleDelete} />
             ))}
             <div className="pr-2 pl-4">
-              <p className="flex items-center justify-between pr-2 mt-3 mb-3">
+              <p className="flex items-center justify-between pr-2 mt-3 mb-3 text-lg">
                 <span>Total :</span>
                 <span className="text-lime-400 text-lg font-medium">${total.toFixed(2)}</span>
               </p>
