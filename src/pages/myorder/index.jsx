@@ -19,23 +19,23 @@ function MyOrder() {
 
     return (
       <>
-        <div className='flex items-center relative justify-center w-2/4 mt-2 mb-5'>
+        <div className='flex items-center relative justify-center w-full sm:w-3/4 md:w-2/4 lg:w-3/6 mt-2 mb-5'>
           <Link to={'/my-orders'} className='absolute left-0 hover:text-blue-500'>
-            <ChevronLeftIcon className='w-8 h-8' />
+            <ChevronLeftIcon className='w-8 h-8'/>
           </Link>
           <h1 className='text-center text-2xl'>My Order</h1>
         </div>
-        <section className={`flex flex-col bg-black rounded-lg z-10 w-2/4`}>
+        <section className={`flex flex-col bg-black rounded-lg z-10 px-2 sm:px-0 w-full sm:w-3/4 md:w-3/5 lg:w-3/6`}>
         <div className="h-screen">
           <div className="px-2">
-            <p className="border-b border-gray-400 pb-1">Order Placed: {order.date}</p>
+            <p className="border-b border-gray-400 pb-1">Order Placed: {order?.date}</p>
           </div>
           {order ? 
           <>
             {order?.products?.map(product => (
             <OrderCard key={product.id} {...product} />
             ))} 
-            <div className="flex justify-between items-center px-2 mt-2">
+            <div className="flex justify-between items-center px-2 mt-2 text-lg">
               <p>Items : <span className="font-medium">{order.totalProducts}</span></p>
               <p>Total : <span className="text-lime-400 font-medium">${order?.totalPrice.toFixed(2)}</span></p>
             </div>

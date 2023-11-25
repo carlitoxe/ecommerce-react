@@ -15,7 +15,9 @@ const OrderCard = ({ id, title, image, price, description, qty, handleDelete }) 
 
     const updateProductQty = (e, productData) => {
         const productToUpdate = cartProducts.find(product => product.id === productData.id);
-        productToUpdate.qty = parseInt(e.target.value);
+        if (e.target.value) {
+            productToUpdate.qty = parseInt(e.target.value);
+        }
         setProductToShow(productData);
     }
     
@@ -38,13 +40,15 @@ const OrderCard = ({ id, title, image, price, description, qty, handleDelete }) 
             className="flex px-2 hover:bg-blue-900 rounded-lg duration-200 ease-in"
             // onClick={() => showProduct({id, title, image, price, description, qty})}
         >
-            <div className='flex justify-between items-center w-full border-b border-gray-500 py-2'>
-                <div className='flex items-center w-72 min-w-72 max-w-72 gap-2 cursor-pointer hover:text-lime-400'
+            <div className='flex justify-between items-center w-full border-b border-gray-500 p py-2'>
+                <div className='flex items-center w-full gap-2 cursor-pointer hover:text-lime-400'
                 onClick={() => showProduct({id, title, image, price, description, qty})}
                 >
                     {
                         !isHomeOrCart && 
-                        <div className='inline-block mr-1 text-gray-400'>{qty} x ${price}</div>
+                        <div className='flex text-gray-400 text-xs sm:text-sm'>
+                            {qty} x ${price}
+                        </div>
                     }
                     <figure className='w-20 h-20'>
                          <img className="w-full h-full rounded-lg object-cover" src={image} alt="" />
@@ -54,7 +58,7 @@ const OrderCard = ({ id, title, image, price, description, qty, handleDelete }) 
                            {isHomeOrCart &&
                                 <input 
                                 type="number" 
-                                className="w-14 mx-2 bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                                className="w-14 mr-1.5 bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block px-2.5 py-1 dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
                                 placeholder="1" 
                                 value={qty} 
                                 onChange={e => updateProductQty(e, {id, qty})} 

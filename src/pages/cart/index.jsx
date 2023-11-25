@@ -11,7 +11,7 @@ const Cart = () => {
 
   return (
     <>
-      <section className="mt-2 w-5/6 sm:w-3/4 md:w-2/4 lg:w-2/5">
+      <section className="mt-2 w-full sm:w-3/4 lg:w-2/4">
         <div className="flex items-center relative justify-center mb-4">
           <h1 className="text-center text-2xl">Shopping Cart</h1>
         </div>
@@ -35,7 +35,7 @@ const Cart = () => {
             </div>
           </div>
         ) : (
-          <div className="text-xl text-center">You have no products in the cart at this moment.</div>
+          <div className="text-xl text-center px-4">You have no products in the cart at this moment.</div>
         )}
       </section>
         <ProductDetailSide />

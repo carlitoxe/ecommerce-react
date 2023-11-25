@@ -4,19 +4,7 @@ import { ShoppingCartContext } from "../../context";
 // import './styles.css'
 
 const ProductDetailSide = () => {
-  const { productToShow, isProductDetailOpen, closeProductDetail, cartProducts, setCartProducts, openCheckoutSideMenu, count, setCount } = useContext(ShoppingCartContext);
-
-  const addProductsToCard = (e, productData) => {
-    e.stopPropagation();
-    const isInCart = cartProducts.some(product => product.id === productData.id);
-    if (!isInCart) {
-        setCount(count + 1);
-        setCartProducts([...cartProducts, productData]);
-    }
-    closeProductDetail();
-    openCheckoutSideMenu();
-}
-
+  const { productToShow, isProductDetailOpen, closeProductDetail, cartProducts, setCartProducts, openCheckoutSideMenu, count, setCount, addProductsToCard } = useContext(ShoppingCartContext);
 
     return (
         <aside key={productToShow.id} className={`${isProductDetailOpen ? 'flex' : 'hidden'} flex-col fixed right-0 border bg-black border-gray-500 rounded-lg top-[68px] w-[360px] h-[calc(100vh-68px)] z-10 overflow-y-auto`}>
