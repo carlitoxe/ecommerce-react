@@ -25,12 +25,36 @@ export const ShoppingCartProvider = ({ children }) => {
 
     // Shopping Cart - Add products to cart
     const [cartProducts, setCartProducts] = useState([]);
-    console.log(cartProducts);
+    
+    // console.log(cartProducts);
 
     // Handling Shopping Cart
     const isCartProducts = cartProducts.length !== 0;
     const total = totalPrice(cartProducts);
+    
+    const addProductsToCard = (e, productData) => {
+      e.stopPropagation();
+      const isInCart = cartProducts.some(product => product.id === productData.id);
+      // productData.qty = qty
+      // console.log(productData);
+      if (!isInCart) {
+          // setCount(count + 1);
+          productData.qty = 1;
+          setCartProducts([...cartProducts, productData]);
+      } else {
+          const productToUpdate = cartProducts.find(product => product.id === productData.id);
+          productToUpdate.qty += 1;
+          // console.log(productToUpdate);
+          // setCartProducts([...cartProducts, {...productData, qty}]);
+        }
+        setCount(count + 1)
+      closeProductDetail();
+      openCheckoutSideMenu();  
+  }
 
+  const totalQty = cartProducts.reduce((sum, product) => sum + product.qty, 0);
+  console.log(totalQty);
+    
     const handleCheckout = () => {
       const date = new Date();
       // const timeNow = Date.now();
@@ -39,8 +63,8 @@ export const ShoppingCartProvider = ({ children }) => {
               id: crypto.randomUUID(),
               date: date.toLocaleDateString(),
               products: cartProducts,
-              totalProducts: cartProducts.length,
-              totalPrice: total
+              totalProducts: totalQty,
+              totalPrice: total,
           }
           setOrders([...orders, orderToAdd]);
           setCartProducts([]);
@@ -49,6 +73,7 @@ export const ShoppingCartProvider = ({ children }) => {
       } else {
           return
       }
+      console.log(cartProducts);
     }
     const handleDelete = (e, id) => { 
         e.stopPropagation();
@@ -57,6 +82,8 @@ export const ShoppingCartProvider = ({ children }) => {
         setCount(count - 1);
         console.log(cartProducts);
     }
+
+  const cartCount = cartProducts.reduce((sum, product) => sum + product.qty, 0);
 
     // Shopping Cart - Order
     const [orders, setOrders] = useState([]);
@@ -119,7 +146,9 @@ export const ShoppingCartProvider = ({ children }) => {
             handleCheckout,
             handleDelete,
             isCartProducts,
-            total
+            total,
+            addProductsToCard,
+            cartCount
         }}
         >
             {children}

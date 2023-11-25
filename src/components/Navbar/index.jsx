@@ -6,7 +6,9 @@ import { Bars3Icon, ShoppingCartIcon } from "@heroicons/react/20/solid";
 const Navbar = () => {
   const activeStyle = 'flex font-normal bg-gray-600 rounded-lg px-2 py-1.5'; 
   const activeStyleMobile = 'flex w-full font-medium  bg-gray-700 rounded-lg px-2 py-1.5'; 
-  const { count, cartProducts } = useContext(ShoppingCartContext)
+  const { cartProducts, cartCount } = useContext(ShoppingCartContext)
+
+  // console.log(cartCount);
 
   const navigationLeft = [
     { name: 'All', href: '/' },
@@ -72,7 +74,7 @@ const Navbar = () => {
               >
                 {item.href !== '/cart' ? 
                 item.name : 
-                <><ShoppingCartIcon className="h-5 w-5 mr-0.5 text-blue-500" /> <span>{cartProducts.length}</span></>
+                <><ShoppingCartIcon className="h-5 w-5 mr-0.5 text-blue-500" /> <span>{cartCount}</span></>
                 }
               </NavLink>
             </li>
@@ -81,6 +83,7 @@ const Navbar = () => {
 
       </ul>
     </nav>
+    {/* Mobile Menu */}
     <nav className="lg:hidden bg-white dark:bg-black w-full fixed top-0 z-50 sm:px-4 border-b border-gray-600">
   <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
   <NavLink to="/" className='text-2xl font-medium'>
@@ -88,7 +91,7 @@ const Navbar = () => {
           </NavLink>
           <div className="flex items-center gap-3">
           <NavLink to='/cart' className={({ isActive }) => isActive ? activeStyleMobile : 'flex px-2 hover:bg-gray-800 rounded-lg py-1.5 duration-200 ease-in'}>
-            <ShoppingCartIcon className="h-6 w-6 mr-0.5 text-blue-500" /> <span>{cartProducts.length}</span>
+            <ShoppingCartIcon className="h-6 w-6 mr-0.5 text-blue-500" /> <span>{cartCount}</span>
 
           </NavLink>
           <button
@@ -146,7 +149,7 @@ const Navbar = () => {
                   >
                     {item.href !== '/cart' ? 
                     item.name : 
-                    <><ShoppingCartIcon className="h-5 w-5 mr-0.5 text-blue-500" /> <span className="mr-2">{cartProducts.length}</span></>
+                    <><ShoppingCartIcon className="h-5 w-5 mr-0.5 text-blue-500" /> <span className="mr-2">{cartCount}</span></>
                     }
                   </NavLink>
                </li>    

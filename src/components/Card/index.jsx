@@ -1,20 +1,20 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { ShoppingCartContext } from '../../context'
 import { ShoppingCartIcon } from "@heroicons/react/20/solid";
 
 const Card = ({ id, title, price, category, image, description }) => {
     const { count, 
             setCount, 
-            setOpenModal, 
             setProductToShow, 
             openProductDetail,
             closeProductDetail,
             cartProducts, 
             setCartProducts,
             openCheckoutSideMenu,
-            closeCheckoutSideMenu
+            closeCheckoutSideMenu,
+            addProductsToCard
         } = useContext(ShoppingCartContext);
-    
+
     const showProduct = (productDetail) => {
         // setOpenModal(state => !state)
         openProductDetail();
@@ -22,16 +22,25 @@ const Card = ({ id, title, price, category, image, description }) => {
         closeCheckoutSideMenu();
     }
 
-    const addProductsToCard = (e, productData) => {
-        e.stopPropagation();
-        const isInCart = cartProducts.some(product => product.id === productData.id);
-        if (!isInCart) {
-            setCount(count + 1);
-            setCartProducts([...cartProducts, productData]);
-        }
-        closeProductDetail();
-        openCheckoutSideMenu();
-    }
+    // const addProductsToCard = (e, productData) => {
+    //     e.stopPropagation();
+    //     const isInCart = cartProducts.some(product => product.id === productData.id);
+    //     // productData.qty = qty
+    //     // console.log(productData);
+    //     if (!isInCart) {
+    //         setCount(count + 1);
+    //         productData.qty = 1;
+    //         setCartProducts([...cartProducts, productData]);
+    //     } else {
+    //         const productToUpdate = cartProducts.find(product => product.id === productData.id);
+    //         productToUpdate.qty += 1;
+    //         // console.log(productToUpdate);
+    //         // setCartProducts([...cartProducts, {...productData, qty}]);
+    //     }
+    //     closeProductDetail();
+    //     openCheckoutSideMenu();  
+    // }
+    console.log(cartProducts);
 
     return (
         <div 

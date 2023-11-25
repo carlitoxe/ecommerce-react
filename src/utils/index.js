@@ -2,8 +2,9 @@ import { useEffect } from "react"
 import { useLocation } from "react-router-dom"
 
 export const totalPrice = (cartProducts) => {
-    const total = cartProducts.reduce((sum, product) => sum + product.price, 0);
-    return total;
+  const total = cartProducts.reduce((sum, product) => sum + product.price * product.qty, 0);
+  console.log(cartProducts);
+  return total;
 }
 
 export const ScrollToTop = () => {
