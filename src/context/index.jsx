@@ -28,6 +28,7 @@ export const ShoppingCartProvider = ({ children }) => {
     if (!localStorageCart) {
       localStorage.setItem('cart', JSON.stringify([]));
     }
+    console.log(localStorageCart);
     // console.log(localStorageCart);
     // let parsedCart = JSON.parse(localStorageCart)
     const [cartProducts, setCartProducts] = useState(JSON.parse(localStorageCart));
@@ -50,7 +51,6 @@ export const ShoppingCartProvider = ({ children }) => {
     const total = totalPrice(cartProducts);
     
     const addProductsToCard = (e, productData) => {
-      
       e.stopPropagation();
       const isInCart = cartProducts.some(product => product.id === productData.id);
       // productData.qty = qty
@@ -59,7 +59,6 @@ export const ShoppingCartProvider = ({ children }) => {
           // setCount(count + 1);
           productData.qty = 1;
           setCartProducts([...cartProducts, productData]);
-
       } else {
           const productToUpdate = cartProducts.find(product => product.id === productData.id);
           productToUpdate.qty += 1;
