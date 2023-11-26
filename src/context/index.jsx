@@ -73,12 +73,11 @@ export const ShoppingCartProvider = ({ children }) => {
   const totalQty = cartProducts?.reduce((sum, product) => sum + product.qty, 0);
 
      // ORDERS with Local Storage
-     const localStorageOrders = localStorage.getItem('orders');
-     if (!localStorageOrders) {
+     if (!localStorage.getItem('orders')) {
        localStorage.setItem('orders', JSON.stringify([]));
      }
 
-     const [orders, setOrders] = useState(JSON.parse(localStorageOrders));
+     const [orders, setOrders] = useState(JSON.parse(localStorage.getItem('orders')));
 
      useEffect(() => {
       localStorage.setItem('orders', JSON.stringify(orders));
