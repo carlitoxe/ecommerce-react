@@ -24,14 +24,13 @@ export const ShoppingCartProvider = ({ children }) => {
     const [productToShow, setProductToShow] = useState({});
 
     // Shopping Cart with Local Storage
-    const localStorageCart = localStorage.getItem('cart');
-    if (!localStorageCart) {
+    if (!localStorage.getItem('cart')) { 
       localStorage.setItem('cart', JSON.stringify([]));
     }
-    console.log(localStorageCart);
+    console.log(localStorage.getItem('cart'));
     // console.log(localStorageCart);
     // let parsedCart = JSON.parse(localStorageCart)
-    const [cartProducts, setCartProducts] = useState(JSON.parse(localStorageCart));
+    const [cartProducts, setCartProducts] = useState(JSON.parse(localStorage.getItem('cart')));
     // console.log(localStorageCart);
     // Local Storage - Cart
     useEffect(() => {
