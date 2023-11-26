@@ -19,13 +19,13 @@ function MyOrder() {
 
     return (
       <>
-        <div className='flex items-center relative justify-center w-full sm:w-3/4 md:w-2/4 lg:w-3/6 mt-2 mb-5'>
+        <div className='flex items-center relative justify-center w-full ssm:px-0 sm:w-3/4 md:w-3/5 lg:w-3/6 mt-2 mb-5'>
           <Link to={'/my-orders'} className='absolute left-0 hover:text-blue-500'>
             <ChevronLeftIcon className='w-8 h-8'/>
           </Link>
           <h1 className='text-center text-2xl'>My Order</h1>
         </div>
-        <section className={`flex flex-col bg-black rounded-lg z-10 px-2 sm:px-0 w-full sm:w-3/4 md:w-3/5 lg:w-3/6`}>
+        <section className={`flex flex-col bg-black rounded-lg z-10 px-2 w-full sm:px-0 sm:w-3/4 md:w-3/5 lg:w-3/6`}>
         <div className="h-screen">
           <div className="px-2">
             <p className="border-b border-gray-400 pb-1">Order Placed: {order?.date}</p>

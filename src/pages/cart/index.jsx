@@ -5,7 +5,7 @@ import OrderCard from "../../components/OrderCard";
 import ProductDetailSide from "../../components/ProductDetailSide";
 
 const Cart = () => {
-  const { cartProducts, handleCheckout, handleDelete, total, isCartProducts, closeCheckoutSideMenu } = useContext(ShoppingCartContext);
+  const { cartProducts, handleCheckout, handleDelete, total, isCartProducts, closeCheckoutSideMenu, parsedCart } = useContext(ShoppingCartContext);
   
   closeCheckoutSideMenu();
 
@@ -15,9 +15,9 @@ const Cart = () => {
         <div className="flex items-center relative justify-center mb-4">
           <h1 className="text-center text-2xl">Shopping Cart</h1>
         </div>
-        {cartProducts.length ? (
+        {cartProducts?.length ? (
           <div className="px-2 flex-1">
-            {cartProducts.map((product) => (
+            {cartProducts?.map((product) => (
               <OrderCard key={product.id} {...product} handleDelete={handleDelete} />
             ))}
             <div className="pr-2 pl-4">

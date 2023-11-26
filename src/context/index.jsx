@@ -23,16 +23,34 @@ export const ShoppingCartProvider = ({ children }) => {
     // Prodduct Detail - Show Product (Info)
     const [productToShow, setProductToShow] = useState({});
 
-    // Shopping Cart - Add products to cart
-    const [cartProducts, setCartProducts] = useState([]);
-    
-    // console.log(cartProducts);
+    // Shopping Cart with Local Storage
+    const localStorageCart = localStorage.getItem('cart');
+    if (!localStorageCart) {
+      localStorage.setItem('cart', JSON.stringify([]));
+    }
+    // console.log(localStorageCart);
+    // let parsedCart = JSON.parse(localStorageCart)
+    const [cartProducts, setCartProducts] = useState(JSON.parse(localStorageCart));
+    // console.log(localStorageCart);
+    // Local Storage - Cart
+    useEffect(() => {
+      localStorage.setItem('cart', JSON.stringify(cartProducts));
+    }, [cartProducts])
 
+    const updateCartStorage = (cartProducts) => {
+      try {
+        localStorage.setItem('cart', JSON.stringify(cartProducts));
+      } catch (err) {
+        console.error(err)
+      }
+    }
+    
     // Handling Shopping Cart
-    const isCartProducts = cartProducts.length !== 0;
+    const isCartProducts = cartProducts?.length !== 0;
     const total = totalPrice(cartProducts);
     
     const addProductsToCard = (e, productData) => {
+      
       e.stopPropagation();
       const isInCart = cartProducts.some(product => product.id === productData.id);
       // productData.qty = qty
@@ -41,52 +59,74 @@ export const ShoppingCartProvider = ({ children }) => {
           // setCount(count + 1);
           productData.qty = 1;
           setCartProducts([...cartProducts, productData]);
+
       } else {
           const productToUpdate = cartProducts.find(product => product.id === productData.id);
           productToUpdate.qty += 1;
           // console.log(productToUpdate);
           // setCartProducts([...cartProducts, {...productData, qty}]);
         }
+        updateCartStorage(cartProducts)
         setCount(count + 1)
       closeProductDetail();
       openCheckoutSideMenu();  
   }
 
-  const totalQty = cartProducts.reduce((sum, product) => sum + product.qty, 0);
-  console.log(totalQty);
+  const totalQty = cartProducts?.reduce((sum, product) => sum + product.qty, 0);
+
+     // ORDERS with Local Storage
+     const localStorageOrders = localStorage.getItem('orders');
+     if (!localStorageOrders) {
+       localStorage.setItem('orders', JSON.stringify([]));
+     }
+
+     const [orders, setOrders] = useState(JSON.parse(localStorageOrders));
+
+     useEffect(() => {
+      localStorage.setItem('orders', JSON.stringify(orders));
+    }, [orders])
+ 
+     const updateOrdersStorage = (orders) => {
+       try {
+         localStorage.setItem('orders', JSON.stringify(orders));
+       } catch (err) {
+         console.error(err)
+       }
+     }
     
     const handleCheckout = () => {
       const date = new Date();
       // const timeNow = Date.now();
       if (isCartProducts) {
-          const orderToAdd = {
-              id: crypto.randomUUID(),
-              date: date.toLocaleDateString(),
+        const orderToAdd = {
+          id: crypto.randomUUID(),
+          date: date.toLocaleDateString(),
               products: cartProducts,
               totalProducts: totalQty,
               totalPrice: total,
           }
           setOrders([...orders, orderToAdd]);
           setCartProducts([]);
+          updateCartStorage([])
           setCount(0);
           closeCheckoutSideMenu();
-      } else {
+        } else {
           return
-      }
-      console.log(cartProducts);
+        }
+        updateOrdersStorage(orders)
+      // console.log(cartProducts);
     }
     const handleDelete = (e, id) => { 
         e.stopPropagation();
         const cartUpdated = cartProducts.filter(product => product.id !== id)
         setCartProducts(cartUpdated)
+        updateCartStorage(cartUpdated)
         setCount(count - 1);
-        console.log(cartProducts);
+        // console.log(cartProducts);
     }
 
-  const cartCount = cartProducts.reduce((sum, product) => sum + product.qty, 0);
+  const cartCount = cartProducts?.reduce((sum, product) => sum + product.qty, 0);
 
-    // Shopping Cart - Order
-    const [orders, setOrders] = useState([]);
     // console.log('order', orders);
 
     // Get Products
@@ -148,7 +188,7 @@ export const ShoppingCartProvider = ({ children }) => {
             isCartProducts,
             total,
             addProductsToCard,
-            cartCount
+            cartCount,
         }}
         >
             {children}

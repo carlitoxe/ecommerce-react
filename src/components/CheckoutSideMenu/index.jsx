@@ -21,14 +21,14 @@ const CheckoutSideMenu = () => {
                     </button>
             </div>
             <div className="px-2 flex-1">
-                {cartProducts.map(product => (
+                {cartProducts?.map(product => (
                     <OrderCard key={product.id} {...product} handleDelete={handleDelete} />
                 ))}
             </div>
                 <div className="pr-2 pl-4">
                     <p className="flex items-center justify-between pr-2 mt-3 mb-3">
                         <span>Total :</span>
-                        <span className="text-lime-400 text-lg font-medium">${total.toFixed(2)}</span>
+                        <span className="text-lime-400 text-lg font-medium">${total?.toFixed(2)}</span>
                     </p>
                     <div className="flex justify-center mb-4">
                     <Link className='w-full' to={`${!isCartProducts ? 'javascript:void(0)' : '/my-orders/last'}`}>

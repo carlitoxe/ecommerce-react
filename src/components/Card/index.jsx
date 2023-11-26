@@ -40,7 +40,6 @@ const Card = ({ id, title, price, category, image, description }) => {
     //     closeProductDetail();
     //     openCheckoutSideMenu();  
     // }
-    console.log(cartProducts);
 
     return (
         <div 
