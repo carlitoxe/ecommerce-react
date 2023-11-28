@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { useLocation } from "react-router-dom"
 
-export const totalPrice = (cartProducts) => {
+export const totalPrice = cartProducts => {
   const total = cartProducts?.reduce((sum, product) => sum + product.price * product.qty, 0);
   return total;
 }

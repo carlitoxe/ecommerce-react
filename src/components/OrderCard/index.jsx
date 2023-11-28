@@ -13,8 +13,10 @@ const OrderCard = ({ id, title, image, price, description, qty, handleDelete }) 
     openProductDetail();
   };
 
+  const productToUpdate = cartProducts.find((product) => product.id === id);
+  
   const updateProductQty = (e, productData) => {
-    const productToUpdate = cartProducts.find((product) => product.id === productData.id);
+    // const productToUpdate = cartProducts.find((product) => product.id === productData.id);
     if (e.target.value) {
       productToUpdate.qty = parseInt(e.target.value, 10);
     }
@@ -22,13 +24,11 @@ const OrderCard = ({ id, title, image, price, description, qty, handleDelete }) 
   };
 
   const incrementBtn = (productData) => {
-    const productToUpdate = cartProducts.find((product) => product.id === productData.id);
     productToUpdate.qty += 1;
     setProductToShow(productData);
   };
 
   const decrementBtn = (productData) => {
-    const productToUpdate = cartProducts.find((product) => product.id === productData.id);
     if (productToUpdate.qty > 1) {
       productToUpdate.qty -= 1;
     }
@@ -85,7 +85,7 @@ const OrderCard = ({ id, title, image, price, description, qty, handleDelete }) 
             <button
               type="button"
               className="flex items-center bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg px-1 h-7 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none"
-              onClick={() => decrementBtn({id, qty})}
+              onClick={() => decrementBtn({ id, title, image, price, description, qty })}
             >
               <MinusIcon className="w-3 h-3 text-gray-900 dark:text-white" />
             </button>
@@ -94,12 +94,13 @@ const OrderCard = ({ id, title, image, price, description, qty, handleDelete }) 
               className="bg-gray-50 border-x-0 border-gray-300 h-7 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-6 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder={qty}
               value={qty}
-              onChange={(e) => updateProductQty(e, {id, qty})}
+              min={0}
+              onChange={(e) => updateProductQty(e, { id, title, image, price, description, qty })}
             />
             <button
               type="button"
               className="flex items-center bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg px-1 h-7 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none"
-              onClick={() => incrementBtn({id, qty})}
+              onClick={() => incrementBtn({ id, title, image, price, description, qty })}
             >
               <PlusIcon className="w-3 h-3 text-gray-900 dark:text-white" />
             </button>
